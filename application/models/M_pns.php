@@ -20,4 +20,8 @@ class M_pns extends CI_Model
     $this->db->where($where);
     $this->db->delete($table);
   }
+  public function ultahPns($cari)
+  {
+    return $this->db->query("select date_format(asn.tanggal_lahir, '%M') as bulan_lahir, nama as nama,tanggal_lahir as tanggal_lahir, jenis_kelamin as jk, golongan as golongan from asn where date_format(asn.tanggal_lahir, '%M') = '$cari'");
+  }
 }

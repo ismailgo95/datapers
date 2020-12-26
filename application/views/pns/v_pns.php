@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-6">
       <div class=" float-right mb-2">
-        <a href="<?= base_url('Admin/Militer/excel') ?>" class="btn btn-success btn-icon-split">
+        <a href="<?= base_url('Admin/Pns/excel') ?>" class="btn btn-success btn-icon-split">
           <span class="icon text-white">
             <i class="fas fa-file-csv"></i>
           </span>
@@ -18,7 +18,7 @@
             Excel
           </span>
         </a>
-        <a href="<?= base_url('Admin/Militer/mpdf') ?>" class="btn btn-danger btn-icon-split">
+        <a href="<?= base_url('Admin/Pns/mpdf') ?>" class="btn btn-danger btn-icon-split">
           <span class="icon text-white">
             <i class="fas fa-file-pdf"></i>
           </span>
@@ -62,7 +62,7 @@
         <div class="col-md-4">
           <?php if (isset($_GET['opsi']) && $_GET['opsi'] != '') : ?>
             <?php if ($_GET['opsi'] == 1) : ?>
-              <form action="<?= base_url('admin/Militer') ?>" method="POST">
+              <form action="<?= base_url('admin/Pns') ?>" method="POST">
                 <div class="input-group">
                   <select name="bulan" class="custom-select">
                     <option selected disabled>Pilih Bulan Lahir</option>
@@ -87,71 +87,98 @@
               <h6 class="mt-2 text-light">Maaf Menu Belum Ada !</h6>
             <?php else : ?>
               <h6 class="mt-2 text-light">Maaf Menu Belum Ada !</h6>
-            <?php endif ?>
-
+            <?php endif; ?>
           <?php endif; ?>
         </div>
       </div>
     </div>
-    <div class="card-body">
-      <table class="table table-responsive table-striped table-bordered table-hover" id="datatable">
-        <thead>
-          <tr class="text-nowrap">
-            <th class="text-center">ACTION</th>
-            <th class="text-center">No</th>
-            <th class="text-center">NAMA</th>
-            <th class="text-center">NIP</th>
-            <th class="text-center">JENIS KELAMIN</th>
-            <th class="text-center">GOLONGAN</th>
-            <th class="text-center">TMT</th>
-            <th class="text-center">GOLONGAN DARAH</th>
-            <th class="text-center">JABATAN</th>
-            <th class="text-center">TMT JABATAN</th>
-            <th class="text-center">MASA KERJA</th>
-            <th class="text-center">NAMA JABATAN</th>
-            <th class="text-center">TAHUN JABATAN</th>
-            <th class="text-center">STATUS DINAS</th>
-            <th class="text-center">PENDIDIKAN</th>
-            <TH class="text-center">TAHUN PENDIDIKAN</TH>
-            <th class="text-center">IJAZAH</th>
-            <th class="text-center">TANGGAL LAHIR</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php $no = 1;
-          foreach ($data_pns as $pns) : ?>
-            <tr class="text-nowrap">
-              <td>
-                <span data-toggle="tooltip" data-original-title="Edit Data" style="font-size:10;" data-placement="left">
-                  <a data-toggle="modal" data-target="#modal-edit<?= $pns->id; ?>" class=" btn btn-sm btn-warning" href=""><i class="fas fa-edit"></i></a>
-                </span>
-                <span data-toggle="tooltip" data-original-title="Hapus Data" style="font-size:10;" data-placement="left">
-                  <a onclick="return confirm('Apakah ingin dihapus ?')" class="btn btn-sm btn-danger" href="<?= base_url('Admin/Pns/delete/' . $pns->id) ?>"><i class="fas fa-trash-alt"></i>
-                  </a>
-                </span>
-              </td>
-              <td class="text-center"><?= $no++ ?></td>
-              <td><?= $pns->nama ?></td>
-              <td><?= $pns->nip ?></td>
-              <td><?= $pns->jenis_kelamin ?></td>
-              <td><?= $pns->golongan ?></td>
-              <td><?= $pns->tmt ?></td>
-              <td><?= $pns->golongan_darah ?></td>
-              <td><?= $pns->jabatan ?></td>
-              <td><?= $pns->tmt_jabatan ?></td>
-              <td><?= $pns->masa_kerja ?></td>
-              <td><?= $pns->nama_jabatan ?></td>
-              <td><?= $pns->tahun_jabatan ?></td>
-              <td><?= $pns->status_dinas ?></td>
-              <td><?= $pns->pendidikan ?></td>
-              <td><?= $pns->tahun_pendidikan ?></td>
-              <td><?= $pns->ijazah ?></td>
-              <td><?= $pns->tanggal_lahir ?></td>
+    <?php if (isset($_POST['submit1'])) : ?>
+      <div class="card-body">
+        <table class="table table-hover table-bordered table-striped" id="datatable">
+          <thead>
+            <tr>
+              <th class="text-center">No</th>
+              <th class="text-center">NAMA</th>
+              <th class="text-center">TANGGAL LAHIR</th>
+              <th class="text-center">GOLONGAN</th>
+              <th class="text-center">JENIS KELAMIN</th>
             </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            <?php $no = 1;
+              foreach ($ultah as $ultah_pns) : ?>
+              <tr class="text-nowrap text-center">
+                <td><?= $no++ ?></td>
+                <td><?= $ultah_pns->nama ?></td>
+                <td class="text-dark font-weight-bold"><?= date('d-F-Y', strtotime($ultah_pns->bulan_lahir)) ?></td>
+                <td><?= $ultah_pns->golongan ?></td>
+                <td><?= $ultah_pns->jk ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    <?php else : ?>
+      <div class="card-body">
+        <table class="table table-responsive table-striped table-bordered table-hover" id="datatable">
+          <thead>
+            <tr class="text-nowrap">
+              <th class="text-center">ACTION</th>
+              <th class="text-center">No</th>
+              <th class="text-center">NAMA</th>
+              <th class="text-center">NIP</th>
+              <th class="text-center">JENIS KELAMIN</th>
+              <th class="text-center">GOLONGAN</th>
+              <th class="text-center">TMT</th>
+              <th class="text-center">GOLONGAN DARAH</th>
+              <th class="text-center">JABATAN</th>
+              <th class="text-center">TMT JABATAN</th>
+              <th class="text-center">MASA KERJA</th>
+              <th class="text-center">NAMA JABATAN</th>
+              <th class="text-center">TAHUN JABATAN</th>
+              <th class="text-center">STATUS DINAS</th>
+              <th class="text-center">PENDIDIKAN</th>
+              <TH class="text-center">TAHUN PENDIDIKAN</TH>
+              <th class="text-center">IJAZAH</th>
+              <th class="text-center">TANGGAL LAHIR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $no = 1;
+              foreach ($data_pns as $pns) : ?>
+              <tr class="text-nowrap">
+                <td>
+                  <span data-toggle="tooltip" data-original-title="Edit Data" style="font-size:10;" data-placement="left">
+                    <a data-toggle="modal" data-target="#modal-edit<?= $pns->id; ?>" class=" btn btn-sm btn-warning" href=""><i class="fas fa-edit"></i></a>
+                  </span>
+                  <span data-toggle="tooltip" data-original-title="Hapus Data" style="font-size:10;" data-placement="left">
+                    <a onclick="return confirm('Apakah ingin dihapus ?')" class="btn btn-sm btn-danger" href="<?= base_url('Admin/Pns/delete/' . $pns->id) ?>"><i class="fas fa-trash-alt"></i>
+                    </a>
+                  </span>
+                </td>
+                <td class="text-center"><?= $no++ ?></td>
+                <td><?= $pns->nama ?></td>
+                <td><?= $pns->nip ?></td>
+                <td><?= $pns->jenis_kelamin ?></td>
+                <td><?= $pns->golongan ?></td>
+                <td><?= $pns->tmt ?></td>
+                <td><?= $pns->golongan_darah ?></td>
+                <td><?= $pns->jabatan ?></td>
+                <td><?= $pns->tmt_jabatan ?></td>
+                <td><?= $pns->masa_kerja ?></td>
+                <td><?= $pns->nama_jabatan ?></td>
+                <td><?= $pns->tahun_jabatan ?></td>
+                <td><?= $pns->status_dinas ?></td>
+                <td><?= $pns->pendidikan ?></td>
+                <td><?= $pns->tahun_pendidikan ?></td>
+                <td><?= $pns->ijazah ?></td>
+                <td><?= $pns->tanggal_lahir ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    <?php endif; ?>
   </div>
 
   <?php require '__add.php'; ?>

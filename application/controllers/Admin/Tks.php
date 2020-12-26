@@ -14,9 +14,11 @@ class Tks extends CI_Controller
     if (!$this->session->userdata('email')) {
       redirect('Auth');
     }
+    $cari = $this->input->post('bulan');
     $data = [
       'judul'         => "DATA TKS",
       'data_tks'      => $this->M_tks->all(),
+      'ultah'         => $this->M_tks->ultahTks($cari)->result(),
       'users'         => $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array()
     ];
     $this->load->view('template/v_header', $data);

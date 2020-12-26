@@ -8,6 +8,10 @@ class M_militer extends CI_Model
   {
     return $this->db->query("SELECT * FROM militer a inner join pangkat b on a.id_pangkat = b.id_pangkat ORDER BY a.id_pangkat ASC")->result();
   }
+  public function getAll($where, $table)
+  {
+    return $this->db->get_where($table, $where)->result();
+  }
   public function get_pangkat()
   {
     return $this->db->get('pangkat');

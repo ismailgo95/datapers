@@ -165,6 +165,7 @@
           <thead>
             <tr>
               <th class="text-center">ACTION</th>
+              <th class="text-center">VIEW</th>
               <th class="text-center">No</th>
               <th class="text-center">NAMA</th>
               <th class="text-center">JENIS KELAMIN</th>
@@ -197,6 +198,11 @@
                     <a onclick="return confirm('Apakah ingin dihapus ?')" class="btn btn-sm btn-danger" href="<?= base_url('Admin/Militer/delete/' . $militer->id) ?>"><i class="fas fa-trash-alt"></i>
                     </a>
                   </span>
+                </td>
+                <td>
+                  <a href="<?= base_url('Admin/Militer/detail/' . $militer->id) ?>" class="btn btn-sm btn-primary">
+                    <i class="fas fa-eye"></i>
+                  </a>
                 </td>
                 <td><?= $no++ ?></td>
                 <td><?= $militer->nama ?></td>

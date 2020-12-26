@@ -188,4 +188,22 @@ class Militer extends CI_Controller
 
     $writer->save('php://output');
   }
+
+  public function detail($id)
+  {
+    if (!$this->session->userdata('email')) {
+      redirect('Auth');
+    }
+    $where = array('id' => $id);
+    $data = [
+      'judul'         => "DATA CV MILITER",
+      'data_militer'  => $this->M_militer->getAll($where, 'militer'),
+      'pangkat'       => $this->M_militer->get_pangkat()->result(),
+      'users'         => $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array()
+    ];
+    $this->load->view('template/v_header', $data);
+    $this->load->view('template/v_sidebar');
+    $this->load->view('militer/cv_militer', $data);
+    $this->load->view('template/v_footer');
+  }
 }

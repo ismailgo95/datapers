@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Pns extends CI_Controller
 {
   public function __construct()
@@ -14,9 +17,11 @@ class Pns extends CI_Controller
     if (!$this->session->userdata('email')) {
       redirect('Auth');
     }
+    $cari = $this->input->post('bulan');
     $data = [
       'judul'         => "DATA PNS",
       'data_pns'      => $this->M_pns->all(),
+      'ultah'         => $this->M_pns->ultahPns($cari)->result(),
       'users'         => $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array()
     ];
     $this->load->view('template/v_header', $data);
@@ -120,5 +125,45 @@ class Pns extends CI_Controller
       </div>
       ');
     redirect('Admin/Pns');
+  }
+
+  public function mpdf()
+  {
+    $mpdf = new \Mpdf\Mpdf();
+    $data_pns = $this->M_pns->all();
+    $data = $this->load->view('pns/mpdf', ['pns' => $data_pns], TRUE);
+    $mpdf->WriteHTML($data);
+    $mpdf->Output();
+  }
+  public function excel()
+  {
+
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'No');
+    $sheet->setCellValue('B1', 'Nama');
+    $sheet->setCellValue('D1', 'Jenis Kelamin');
+    $sheet->setCellValue('D1', 'Jabatan');
+    $sheet->setCellValue('E1', 'Golongan');
+
+    $pns = $this->M_pns->all();
+    $no = 1;
+    $x = 2;
+    foreach ($pns as $row) {
+      $sheet->setCellValue('A' . $x, $no++);
+      $sheet->setCellValue('B' . $x, $row->nama);
+      $sheet->setCellValue('C' . $x, $row->jenis_kelamin);
+      $sheet->setCellValue('D' . $x, $row->jabatan);
+      $sheet->setCellValue('E' . $x, $row->golongan);
+      $x++;
+    }
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'Data Personalia Pns';
+
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $writer->save('php://output');
   }
 }
