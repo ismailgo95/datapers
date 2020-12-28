@@ -3,6 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Borders;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class Militer extends CI_Controller
 {
@@ -161,10 +163,43 @@ class Militer extends CI_Controller
   {
 
     $spreadsheet = new Spreadsheet();
+    $styleArray = array(
+      'borders' => array(
+        'allBorders'  => array(
+          'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          'color'       => ['argb' => 'FF000000'],
+        ),
+      ),
+    );
+    $styleArray2 = array(
+      'borders' => array(
+        'allBorders'  => array(
+          'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+          'color'       => ['argb' => 'FF000000'],
+        ),
+      ),
+    );
+    $styleFont = array(
+      'font'  => array(
+        'bold'  => true,
+        'color' => array('argb' => 'FF000000'),
+        'size'  => 12,
+      )
+    );
+    $spreadsheet->getActiveSheet()->getStyle('A1:E86')->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('A1:E1')->applyFromArray($styleArray2);
+    $spreadsheet->getActiveSheet()->getStyle('A1:E1')->applyFromArray($styleFont);
+    // Setting Ukuran
+    $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+    $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(45);
+    $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(14);
+    $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(73);
+    $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setCellValue('A1', 'No');
     $sheet->setCellValue('B1', 'Nama');
-    $sheet->setCellValue('D1', 'Jenis Kelamin');
+    $sheet->setCellValue('C1', 'Jenis Kelamin');
     $sheet->setCellValue('D1', 'Jabatan');
     $sheet->setCellValue('E1', 'Nama Pangkat');
 

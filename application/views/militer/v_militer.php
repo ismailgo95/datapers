@@ -106,7 +106,7 @@
     </div>
     <?php if (isset($_POST['submit1'])) : ?>
       <div class="card-body">
-        <table class="table table-hover table-bordered table-striped table-responsive" id="datatable">
+        <table class="table table-bordered table-striped" id="datatable2">
           <thead>
             <tr>
               <th class="text-center">No</th>
@@ -132,7 +132,7 @@
       </div>
     <?php elseif (isset($_POST['submit2'])) : ?>
       <div class="card-body">
-        <table class="table table-hover table-bordered table-striped table-responsive" id="datatable">
+        <table class="table table-bordered table-striped" id="datatable2">
           <thead>
             <tr>
               <th class="text-center">No</th>
@@ -161,7 +161,7 @@
       </div>
     <?php else : ?>
       <div class="card-body">
-        <table class="table table-responsive table-striped table-bordered" id="datatable">
+        <table class="table table-bordered table-striped" id="datatable">
           <thead>
             <tr>
               <th class="text-center">ACTION</th>

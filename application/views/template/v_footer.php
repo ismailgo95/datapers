@@ -35,14 +35,40 @@
     <!-- Datatables -->
     <script src="<?= base_url() ?>assets/js/datatables.js"></script>
     <script src="<?= base_url() ?>assets/js/dataTables.bootstrap4.js"></script>
-
-    <!-- SweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="<?= base_url() ?>assets/js/dataTables.fixedColumns.js"></script>
+    <script src="<?= base_url() ?>assets/js/fixedColumns.bootstrap4.js"></script>
+    <script src="<?= base_url() ?>assets/js/fixedColumns.dataTables.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function() {
         $('#datatable').DataTable({
-
+          scrollX: true,
+          scrollCollapse: true,
+          fixedColumns: {
+            leftColumns: 4
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#datatable1').DataTable({
+          scrollX: true,
+          scrollCollapse: true,
+          fixedColumns: {
+            leftColumns: 3
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#datatable2').DataTable({
+          scrollX: true,
+          scrollCollapse: true,
+          fixedColumns: {
+            leftColumns: 2
+          }
         });
       });
     </script>

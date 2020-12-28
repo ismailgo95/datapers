@@ -19,12 +19,12 @@
   <!-- DataTable -->
   <link href="<?= base_url() ?>assets/css/datatables.css" rel="stylesheet">
   <link href="<?= base_url() ?>assets/css/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/css/fixedColumns.bootstrap.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/css/fixedColumns.bootstrap4.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/css/fixedColumns.dataTables.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
-
-  <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
-  <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
 
 
 </head>
