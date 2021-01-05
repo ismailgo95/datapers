@@ -30,7 +30,7 @@ class Militer extends CI_Controller
     $this->load->view('template/v_header', $data);
     $this->load->view('template/v_sidebar');
     $this->load->view('militer/v_militer', $data);
-    $this->load->view('template/v_footer');
+    $this->load->view('militer/__footer');
   }
 
   public function create()
@@ -232,13 +232,12 @@ class Militer extends CI_Controller
     $where = array('id' => $id);
     $data = [
       'judul'         => "DATA CV MILITER",
-      'data_militer'  => $this->M_militer->getAll($where, 'militer'),
-      'pangkat'       => $this->M_militer->get_pangkat()->result(),
+      'data_militer'  => $this->M_militer->getAll($where),
       'users'         => $this->db->get_where('users', ['email' => $this->session->userdata('email')])->row_array()
     ];
     $this->load->view('template/v_header', $data);
     $this->load->view('template/v_sidebar');
     $this->load->view('militer/cv_militer', $data);
-    $this->load->view('template/v_footer');
+    $this->load->view('militer/__footer');
   }
 }

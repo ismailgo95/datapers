@@ -24,7 +24,7 @@ class Tks extends CI_Controller
     $this->load->view('template/v_header', $data);
     $this->load->view('template/v_sidebar', $data);
     $this->load->view('tks/v_tks', $data);
-    $this->load->view('template/v_footer');
+    $this->load->view('tks/__footer');
   }
   public function create()
   {
